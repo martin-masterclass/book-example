@@ -20,5 +20,10 @@ class DatabaseSeeder extends Seeder
              'name' => 'Martin',
              'email' => 'hello@laravelacademy.com',
          ]);
+
+         $this->call([
+             \Database\Seeders\CustomerSeeder::class,
+         ]);
     }
 }
+
