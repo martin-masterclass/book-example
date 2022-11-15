@@ -47,12 +47,13 @@ class CustomerResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('company_name', 'asc')
             ->columns([
-                Tables\Columns\TextColumn::make('company_name'),
-                Tables\Columns\TextColumn::make('contact_name'),
+                Tables\Columns\TextColumn::make('company_name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('contact_name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('phone'),
-                Tables\Columns\TextColumn::make('city'),
-                Tables\Columns\TextColumn::make('country'),
+                Tables\Columns\TextColumn::make('city')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('country')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('remarks'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
@@ -69,14 +70,14 @@ class CustomerResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -84,5 +85,5 @@ class CustomerResource extends Resource
             'create' => Pages\CreateCustomer::route('/create'),
             'edit' => Pages\EditCustomer::route('/{record}/edit'),
         ];
-    }    
+    }
 }
