@@ -49,8 +49,11 @@ class CustomerResource extends Resource
         return $table
             ->defaultSort('company_name', 'asc')
             ->columns([
-                Tables\Columns\TextColumn::make('company_name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('contact_name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('company_name')->sortable()
+                    ->searchable(isIndividual: true, isGlobal: false),
+                Tables\Columns\TextColumn::make('contact_name')
+                    ->sortable()
+                    ->searchable(isIndividual: true, isGlobal: false),
                 Tables\Columns\TextColumn::make('phone'),
                 Tables\Columns\TextColumn::make('city')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('country')->sortable()->searchable(),
