@@ -53,7 +53,11 @@ class CustomerResource extends Resource
                     ->searchable(isIndividual: true, isGlobal: false),
                 Tables\Columns\TextColumn::make('contact_name')
                     ->sortable()
-                    ->searchable(isIndividual: true, isGlobal: false),
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('contact_name', 'like', "{$search}%")
+                            ->orWhere('contact_name', 'like', "% {$search}%");
+                    }, isIndividual: true, isGlobal: false),
                 Tables\Columns\TextColumn::make('phone'),
                 Tables\Columns\TextColumn::make('city')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('country')->sortable()->searchable(),
